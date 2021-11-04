@@ -86,7 +86,7 @@ class DashboardFragment : Fragment(), OnMapReadyCallback {
                         .title(port.location)
                         .zIndex(10f)
                         .position(LatLng(port.lat, port.lng))
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.baseline_directions_bike_black_18))
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.baseline_location_on_black_36))
                 )
                 cnt++
                 Log.d("debug", cnt.toString())
