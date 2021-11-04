@@ -75,7 +75,6 @@ class DashboardFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-
         try {
             val data = parseJson("Machinori.json")
             val jsonObj = data.getJSONArray("Machinori")
@@ -88,7 +87,7 @@ class DashboardFragment : Fragment(), OnMapReadyCallback {
                         .title(port.location)
                         .zIndex(10f)
                         .position(LatLng(port.lat, port.lng))
-                        .icon(BitmapDescriptorFactory.fromResource(com.example.machinori.R.drawable.baseline_directions_bike_black_18))
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.baseline_directions_bike_black_18))
                 )
                 cnt++
                 Log.d("debug", cnt.toString())
@@ -107,7 +106,6 @@ class DashboardFragment : Fragment(), OnMapReadyCallback {
         var location: String
         var lat: Double
         var lng: Double
-
         init {
             id = json.getInt("id")
             location = json.getString("name")
