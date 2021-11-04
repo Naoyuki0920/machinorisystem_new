@@ -5,10 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
@@ -19,19 +15,17 @@ import java.io.IOException
 import java.io.InputStreamReader
 import androidx.fragment.app.Fragment
 import com.example.machinori.R
-import com.example.machinori.databinding.FragmentDashboardBinding
-
+import com.google.android.gms.maps.*
 
 
 class DashboardFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
-    private var _binding: FragmentDashboardBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var mapView: MapView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        requireActivity().setTitle(com.example.machinori.R.string.title_dashboard)
+        requireActivity().setTitle(R.string.title_dashboard)
     }
 
     override fun onCreateView(
@@ -39,17 +33,45 @@ class DashboardFragment : Fragment(), OnMapReadyCallback {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-//        val mapFragment = childFragmentManager.findFragmentById(R.id.text_dashboard) as SupportMapFragment
-//        mapFragment.getMapAsync(this)
+        val root= inflater.inflate(R.layout.fragment_dashboard, container, false)
+        mapView= root.findViewById(R.id.text_dashboard) as MapView
+        if (mapView != null) {
+            mapView!!.onCreate(null);
+            mapView!!.onResume();
+            mapView!!.getMapAsync(this);
+        }
         return root
     }
 
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        val mapFragment = childFragmentManager.findFragmentById(R.id.text_dashboard) as? SupportMapFragment
-//        mapFragment?.getMapAsync(this)
-//    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val mapFragment = childFragmentManager.findFragmentById(R.id.text_dashboard) as? SupportMapFragment
+        mapFragment?.getMapAsync(this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mapView.onResume()
+    }
+    override fun onPause() {
+        super.onPause()
+        mapView.onPause()
+    }
+    override fun onStart() {
+        super.onStart()
+        mapView.onStart()
+    }
+    override fun onStop() {
+        super.onStop()
+        mapView.onStop()
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        mapView.onDestroy()
+    }
+    override fun onLowMemory() {
+        super.onLowMemory()
+        mapView.onLowMemory()
+    }
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
@@ -79,7 +101,6 @@ class DashboardFragment : Fragment(), OnMapReadyCallback {
         val kanazawa = LatLng(36.5757632, 136.6372995)
         mMap.moveCamera(CameraUpdateFactory.newLatLng(kanazawa))
     }
-
 
     class Port(json: JSONObject) {
         var id: Int
@@ -111,10 +132,5 @@ class DashboardFragment : Fragment(), OnMapReadyCallback {
         inputStream.close()
         bufferedReader.close()
         return json
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
