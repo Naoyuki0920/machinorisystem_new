@@ -17,7 +17,6 @@ import androidx.fragment.app.Fragment
 import com.example.machinori.R
 import com.google.android.gms.maps.*
 
-
 class DashboardFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
