@@ -80,7 +80,7 @@ class SpotFragment : Fragment(), OnMapReadyCallback {
                         .title(port.location)
                         .zIndex(10f)
                         .position(LatLng(port.lat, port.lng))
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
                 )
                 cnt++
                 Log.d("debug", cnt.toString())
