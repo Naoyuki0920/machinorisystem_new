@@ -1,7 +1,6 @@
 package com.example.machinori.ui.spot
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -83,7 +82,6 @@ class SpotFragment : Fragment(), OnMapReadyCallback {
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
                 )
                 cnt++
-                Log.d("debug", cnt.toString())
             }
         } catch (e: IOException) {
             e.printStackTrace()

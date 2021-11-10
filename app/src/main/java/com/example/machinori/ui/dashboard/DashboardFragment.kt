@@ -1,7 +1,6 @@
 package com.example.machinori.ui.dashboard
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -82,7 +81,6 @@ class DashboardFragment : Fragment(), OnMapReadyCallback {
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
                 )
                 cnt++
-                Log.d("debug", cnt.toString())
             }
         } catch (e: IOException) {
             e.printStackTrace()
