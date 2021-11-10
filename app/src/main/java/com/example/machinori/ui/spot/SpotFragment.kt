@@ -1,4 +1,4 @@
-package com.example.machinori.ui.dashboard
+package com.example.machinori.ui.spot
 
 import android.os.Bundle
 import android.util.Log
@@ -17,7 +17,7 @@ import androidx.fragment.app.Fragment
 import com.example.machinori.R
 import com.google.android.gms.maps.*
 
-class DashboardFragment : Fragment(), OnMapReadyCallback {
+class SpotFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private lateinit var mapView: MapView
@@ -27,16 +27,17 @@ class DashboardFragment : Fragment(), OnMapReadyCallback {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root= inflater.inflate(R.layout.fragment_dashboard, container, false)
-        mapView = root.findViewById(R.id.text_dashboard) as MapView
+        val root= inflater.inflate(R.layout.fragment_spot, container, false)
+        mapView = root.findViewById(R.id.text_spot) as MapView
         mapView.onCreate(null)
         mapView.onResume()
         mapView.getMapAsync(this)
+
         return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val mapFragment = childFragmentManager.findFragmentById(R.id.text_dashboard) as? SupportMapFragment
+        val mapFragment = childFragmentManager.findFragmentById(R.id.text_spot) as? SupportMapFragment
         mapFragment?.getMapAsync(this)
     }
 
@@ -68,8 +69,8 @@ class DashboardFragment : Fragment(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         try {
-            val data = parseJson("Machinori.json")
-            val jsonObj = data.getJSONArray("Machinori")
+            val data = parseJson("Spot.json")
+            val jsonObj = data.getJSONArray("Spot")
             var cnt = 0
             for (i in 0 until jsonObj.length()) {
                 val central = jsonObj.getJSONObject(i)
@@ -79,7 +80,7 @@ class DashboardFragment : Fragment(), OnMapReadyCallback {
                         .title(port.location)
                         .zIndex(10f)
                         .position(LatLng(port.lat, port.lng))
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
                 )
                 cnt++
                 Log.d("debug", cnt.toString())
@@ -109,7 +110,7 @@ class DashboardFragment : Fragment(), OnMapReadyCallback {
     @Throws(JSONException::class, IOException::class)
     private fun parseJson(file: String): JSONObject {
         val assetManager = resources.assets
-        val inputStream= assetManager.open("Machinori.json")
+        val inputStream= assetManager.open("Spot.json")
         val bufferedReader = BufferedReader(InputStreamReader(inputStream))
         var json: JSONObject? = null
         var data: String? = ""

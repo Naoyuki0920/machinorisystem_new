@@ -7,8 +7,13 @@
         android:title="お知らせ" />
 
     <item
+        android:id="@+id/navigation_spot"
+        android:icon="@drawable/baseline_directions_walk_24"
+        android:title="スポット" />
+
+    <item
         android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/outline_place_24"
+        android:icon="@drawable/baseline_directions_bike_24"
         android:title="ポート" />
 
     <item
